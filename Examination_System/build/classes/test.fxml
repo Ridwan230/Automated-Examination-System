@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="330.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestController">
+   <children>
+      <Label layoutX="22.0" layoutY="36.0" prefHeight="40.0" prefWidth="257.0" text="TEST" />
+      <TextField fx:id="name" layoutX="76.0" layoutY="98.0" promptText="name" />
+      <TextField fx:id="id" layoutX="76.0" layoutY="132.0" promptText="ID" />
+      <TextField fx:id="department" layoutX="76.0" layoutY="165.0" promptText="department" />
+      <TextField fx:id="username" layoutX="76.0" layoutY="200.0" promptText="username" />
+      <TextField fx:id="password" layoutX="76.0" layoutY="232.0" promptText="password" />
+      <TextField fx:id="confirm_password" layoutX="76.0" layoutY="264.0" promptText="confirm password" />
+      <Button layoutX="125.0" layoutY="291.0" mnemonicParsing="false" onAction="#Create" text="creation" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Examination_System.jnlp">
+  <information>
+    <title>Examination_System</title>
+    <vendor>ASUS</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Examination_System.jar" size="16310" download="eager" />
+    <jar href="lib\sqlite-jdbc-3.32.3.2.jar" size="7210681" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="Examination_System"  name="Examination_System" />
+  <update check="always"/>
+</jnlp>
