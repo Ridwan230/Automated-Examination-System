@@ -18,15 +18,15 @@ import javafx.stage.Stage;
  * @author ASUS
  */
 public class Student_Login_Controller {
-    /*public void Sign_in(ActionEvent event) throws IOException
+    public void Sign_in(ActionEvent event) throws IOException
     {
         ((Node)event.getSource()).getScene().getWindow().hide();
-        Parent root = FXMLLoader.load(getClass().getResource("Teacher_Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Student_main.fxml"));
         Scene scene = new Scene(root);
         Stage primaryStage = new Stage();
         primaryStage.setScene(scene);
         primaryStage.show();
-    }*/
+    }
     public void Create_account(ActionEvent event) throws IOException
     {
         ((Node)event.getSource()).getScene().getWindow().hide();
