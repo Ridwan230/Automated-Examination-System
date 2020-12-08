@@ -17,9 +17,14 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 
 public class Student_create_account_Controller implements Initializable{
@@ -96,17 +101,31 @@ public class Student_create_account_Controller implements Initializable{
     public void Create(ActionEvent event) throws IOException
     { 
         try{
-            if(Student_isLogin()==true)
-            {
+            if (Student_isLogin() == true) {
                 System.out.println("\nAccount Created\n");
+                ((Node) event.getSource()).getScene().getWindow().hide();
+                Parent root = FXMLLoader.load(getClass().getResource("Student_Login.fxml"));
+                Scene scene = new Scene(root);
+                Stage primaryStage = new Stage();
+                primaryStage.setScene(scene);
+                primaryStage.show();
             }
             else
             {
                 System.out.println("Account not created");
             }
-           }catch (SQLException e)
-        {
+        }catch (SQLException e){
             System.out.println("\ncreated e problem\n");
         }
+    }
+    
+    public void Back(ActionEvent event) throws IOException
+    { 
+        ((Node)event.getSource()).getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("Student_Login.fxml"));
+        Scene scene = new Scene(root);
+        Stage primaryStage = new Stage();
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }

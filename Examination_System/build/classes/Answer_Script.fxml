@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Answer_Script_Controller">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="106.0" prefWidth="159.0">
+               <children>
+                  <Label text="Exam Name:">
+                     <VBox.margin>
+                        <Insets left="40.0" top="15.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Total Marks:">
+                     <VBox.margin>
+                        <Insets left="40.0" top="5.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Total Time:">
+                     <VBox.margin>
+                        <Insets left="40.0" top="5.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="106.0" prefWidth="260.0">
+               <children>
+                  <Label fx:id="exam_name" text="Label">
+                     <VBox.margin>
+                        <Insets left="40.0" top="15.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="total_marks" text="Label">
+                     <VBox.margin>
+                        <Insets left="40.0" top="5.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="total_time" text="Label">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="40.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="106.0" prefWidth="235.0">
+               <children>
+                  <Label text="Time Remaining">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="40.0" top="20.0" />
+                     </padding>
+                  </Label>
+                  <Label text="...">
+                     <VBox.margin>
+                        <Insets left="90.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0">
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </Separator>
+      <HBox prefHeight="67.0" prefWidth="650.0">
+         <children>
+            <Label text="Select Question:">
+               <HBox.margin>
+                  <Insets left="120.0" top="20.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="QuestionNumberBox" onAction="#select_question" prefWidth="150.0">
+               <HBox.margin>
+                  <Insets left="5.0" top="22.0" />
+               </HBox.margin>
+            </ComboBox>
+            <Button mnemonicParsing="false" onAction="#save_changes" text="Save Changes">
+               <HBox.margin>
+                  <Insets left="25.0" top="22.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <Label fx:id="Question_statement" prefHeight="166.0" prefWidth="575.0">
+         <VBox.margin>
+            <Insets left="40.0" top="20.0" />
+         </VBox.margin>
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <HBox prefHeight="163.0" prefWidth="650.0">
+         <children>
+            <VBox prefHeight="163.0" prefWidth="333.0">
+               <children>
+                  <RadioButton fx:id="Option_A" mnemonicParsing="false">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="60.0" top="30.0" />
+                     </VBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="option" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="Option_C" mnemonicParsing="false" toggleGroup="$option">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="60.0" top="30.0" />
+                     </VBox.margin>
+                  </RadioButton>
+               </children>
+            </VBox>
+            <VBox prefHeight="163.0" prefWidth="317.0">
+               <children>
+                  <RadioButton fx:id="Option_B" mnemonicParsing="false" toggleGroup="$option">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="40.0" top="30.0" />
+                     </VBox.margin>
+                  </RadioButton>
+                  <RadioButton fx:id="Option_D" mnemonicParsing="false" toggleGroup="$option">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="40.0" top="30.0" />
+                     </VBox.margin>
+                  </RadioButton>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#previous_question" prefWidth="62.0" text="Previous">
+               <HBox.margin>
+                  <Insets left="170.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#next_question" prefWidth="62.0" text="Next">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Button>
+            <VBox prefHeight="100.0" prefWidth="327.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#Submit" prefHeight="36.0" prefWidth="63.0" text="Submit">
+                     <VBox.margin>
+                        <Insets left="230.0" top="50.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

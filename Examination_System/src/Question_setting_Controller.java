@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -18,7 +17,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -132,17 +130,15 @@ public class Question_setting_Controller implements Initializable {
                     String query1 = "Insert into Question_info(Question_number,Exam_Code,Question_statement,Option_a,Option_b,Option_c,Option_d,Correct_answer) values (?,?,?,?,?,?,?,?)";
                     preparedstatement = connection.prepareStatement(query1);
                     preparedstatement.setString(1, Integer.toString(i));
-                    preparedstatement.setString(3, question[i].getQues_statement());
                     preparedstatement.setString(2, Integer.toString(selected_exam.getExam_code()));
+                    preparedstatement.setString(3, question[i].getQues_statement());                   
                     preparedstatement.setString(4, question[i].getOption_a());
                     preparedstatement.setString(5, question[i].getOption_b());
                     preparedstatement.setString(6, question[i].getOption_c());
                     preparedstatement.setString(7, question[i].getOption_d());
                     preparedstatement.setString(8, question[i].getCorrect_ans());
                     preparedstatement.executeUpdate();
-                }
-         
-                
+                }               
             }
             
         } catch (Exception e) {
@@ -152,6 +148,16 @@ public class Question_setting_Controller implements Initializable {
             preparedstatement.close();
             
         }
+    }
+    
+    public void Back(ActionEvent event) throws IOException
+    { 
+        ((Node)event.getSource()).getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("Teacher_main.fxml"));
+        Scene scene = new Scene(root);
+        Stage primaryStage = new Stage();
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }
 

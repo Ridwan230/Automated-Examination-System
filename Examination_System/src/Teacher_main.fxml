@@ -19,7 +19,7 @@
       </Label>
       <Label fx:id="teacher_username">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font size="15.0" />
          </font></Label>
       <Label fx:id="teacher_id" />
       <Label fx:id="teacher_Department" />
@@ -33,5 +33,10 @@
       <TextField fx:id="exam_time" promptText="Enter Exam Time (in minutes)" />
       <TextField fx:id="total_questions" promptText="Total Number of Questions (Max = 100)" />
       <Button mnemonicParsing="false" onAction="#Confirm" text="Confirm" />
+      <Button mnemonicParsing="false" onAction="#Back" text="Back">
+         <VBox.margin>
+            <Insets right="335.0" top="10.0" />
+         </VBox.margin>
+      </Button>
    </children>
 </VBox>

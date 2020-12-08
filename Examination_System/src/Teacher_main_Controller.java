@@ -18,7 +18,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -127,4 +126,13 @@ public class Teacher_main_Controller implements Initializable {
         }
     }
 
+    public void Back(ActionEvent event) throws IOException
+    { 
+        ((Node)event.getSource()).getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("Teacher_Login.fxml"));
+        Scene scene = new Scene(root);
+        Stage primaryStage = new Stage();
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 }

@@ -92,5 +92,15 @@ public class Teacher_Login_Controller implements Initializable {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    
+    public void Back(ActionEvent event) throws IOException
+    { 
+        ((Node)event.getSource()).getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("main_window.fxml"));
+        Scene scene = new Scene(root);
+        Stage primaryStage = new Stage();
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 
 }

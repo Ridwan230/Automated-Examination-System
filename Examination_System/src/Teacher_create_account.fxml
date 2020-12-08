@@ -21,5 +21,6 @@
       <PasswordField fx:id="confirm_password" layoutX="23.0" layoutY="244.0" prefHeight="25.0" prefWidth="255.0" promptText="confirm password" />
       <Button layoutX="125.0" layoutY="291.0" mnemonicParsing="false" onAction="#Create" text="Create" />
       <TextField fx:id="department" layoutX="23.0" layoutY="140.0" prefHeight="25.0" prefWidth="255.0" promptText="department" />
+      <Button layoutX="3.0" layoutY="304.0" mnemonicParsing="false" onAction="#Back" text="Back" />
    </children>
 </AnchorPane>

@@ -9,9 +9,10 @@
 <AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher_Login_Controller">
    <children>
       <Label layoutX="33.0" layoutY="44.0" prefHeight="26.0" prefWidth="133.0" text="Teacher Login" />
-      <Button layoutX="15.0" layoutY="241.0" mnemonicParsing="false" onAction="#Sign_in" prefHeight="32.0" prefWidth="126.0" text="SignIn" />
-      <TextField fx:id="textfield_username" layoutX="28.0" layoutY="125.0" prefHeight="26.0" prefWidth="243.0" promptText="username" />
-      <PasswordField fx:id="textfield_password" layoutX="29.0" layoutY="167.0" prefHeight="26.0" prefWidth="243.0" promptText="password" />
-      <Button layoutX="162.0" layoutY="241.0" mnemonicParsing="false" onAction="#Create_account" prefHeight="32.0" prefWidth="126.0" text="Create Account" />
+      <Button layoutX="14.0" layoutY="216.0" mnemonicParsing="false" onAction="#Sign_in" prefHeight="32.0" prefWidth="126.0" text="SignIn" />
+      <TextField fx:id="textfield_username" layoutX="29.0" layoutY="113.0" prefHeight="26.0" prefWidth="243.0" promptText="username" />
+      <PasswordField fx:id="textfield_password" layoutX="29.0" layoutY="156.0" prefHeight="26.0" prefWidth="243.0" promptText="password" />
+      <Button layoutX="160.0" layoutY="216.0" mnemonicParsing="false" onAction="#Create_account" prefHeight="32.0" prefWidth="126.0" text="Create Account" />
+      <Button layoutX="130.0" layoutY="261.0" mnemonicParsing="false" onAction="#Back" text="Back" />
    </children>
 </AnchorPane>
