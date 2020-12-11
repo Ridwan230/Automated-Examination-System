@@ -42,6 +42,9 @@ public class Answer_Script_Controller implements Initializable {
     private Label total_time;
     
     @FXML
+    private Label time_remaining;
+    
+    @FXML
     private ComboBox QuestionNumberBox;
     
     @FXML
@@ -62,12 +65,14 @@ public class Answer_Script_Controller implements Initializable {
     @FXML
     private ToggleGroup option;
     
-    int total_questions, exam_code, student_id;
+    int total_questions, exam_code, student_id, time;
+    boolean is_exam_started=false;
     
-    public void pass_exam_info(String name, int marks, int time, int tot_questions, int code, int stu_id) throws SQLException, IOException {
+    public void pass_exam_info(String name, int marks, int t, int tot_questions, int code, int stu_id) throws SQLException, IOException {
         exam_name.setText(name);
         total_marks.setText(Integer.toString(marks));
-        total_time.setText(Integer.toString(time)+" Minutes");
+        time=t;
+        total_time.setText(Integer.toString(t)+" Minutes");
         total_questions=tot_questions;
         exam_code = code;
         student_id = stu_id;
@@ -119,6 +124,30 @@ public class Answer_Script_Controller implements Initializable {
     
     public void select_question(ActionEvent event){
         try {
+//            if(is_exam_started==false)
+//            {
+//                time_remaining.setText(Integer.toString(time*60));
+//                Runnable obj1 = new Runnable()
+//                {
+//                    public void run(){
+//                        int temp = time*60;
+//                        for (int i = 1; i <= time*60; i++) {
+//                            try {
+//                                temp--;
+//                                //time_remaining.setText(Integer.toString(temp));
+//                                System.out.println("\nMULTITHREAD "+temp+"\n");
+//                                Thread.sleep(1000);
+//                            } catch (Exception e) {
+//                                System.out.println("Time class e problem");
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                };
+//                Thread t1 = new Thread(obj1);
+//                t1.start();
+//                is_exam_started=true;
+//            }
             int x = Integer.parseInt(QuestionNumberBox.getValue().toString());
             Question_statement.setText(question[x].getQues_statement());
             Option_A.setText(question[x].getOption_a());
@@ -268,6 +297,13 @@ public class Answer_Script_Controller implements Initializable {
                         Option_A.setSelected(false);
                     }
                 }
+                for(int i=0;i<10;i++)
+                {
+                    System.out.println("HERE\n");
+                    time_remaining.setText(Integer.toString(i));
+                    Thread.sleep(500);
+                    time_remaining.setText("NIL");
+                }
             }
         } catch (Exception e) {
             System.out.println("\nPrevious question e problem\n");
@@ -348,7 +384,7 @@ public class Answer_Script_Controller implements Initializable {
                     {
                         preparedstatement.setString(4, "d");
                     }
-
+                    
                     preparedstatement.executeUpdate();
                 }           
             }
