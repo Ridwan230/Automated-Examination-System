@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -63,9 +65,12 @@ public class Answer_Script_Controller implements Initializable {
     private RadioButton Option_D;
     
     @FXML
+    private Button submit;
+    
+    @FXML
     private ToggleGroup option;
     
-    int total_questions, exam_code, student_id, time;
+    int total_questions, exam_code, student_id, time, temp;
     boolean is_exam_started=false;
     
     public void pass_exam_info(String name, int marks, int t, int tot_questions, int code, int stu_id) throws SQLException, IOException {
@@ -124,30 +129,34 @@ public class Answer_Script_Controller implements Initializable {
     
     public void select_question(ActionEvent event){
         try {
-//            if(is_exam_started==false)
-//            {
-//                time_remaining.setText(Integer.toString(time*60));
-//                Runnable obj1 = new Runnable()
-//                {
-//                    public void run(){
-//                        int temp = time*60;
-//                        for (int i = 1; i <= time*60; i++) {
-//                            try {
-//                                temp--;
-//                                //time_remaining.setText(Integer.toString(temp));
-//                                System.out.println("\nMULTITHREAD "+temp+"\n");
-//                                Thread.sleep(1000);
-//                            } catch (Exception e) {
-//                                System.out.println("Time class e problem");
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }
-//                };
-//                Thread t1 = new Thread(obj1);
-//                t1.start();
-//                is_exam_started=true;
-//            }
+            if(is_exam_started==false)
+            {
+                time_remaining.setText(Integer.toString(time*60));
+                Runnable obj1 = new Runnable()
+                {
+                    public void run(){
+                        temp = time*60;
+                        for (int i = 1; i <= time*60; i++) {
+                            try {
+                                temp--;
+                                int temp1=temp;
+                                Platform.runLater(() -> time_remaining.setText(Integer.toString(temp1)));
+                                Thread.sleep(1000);
+                                if(temp==0)
+                                {
+                                    Platform.runLater(() -> submit.fire());
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Time class e problem");
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                };
+                Thread t1 = new Thread(obj1);
+                t1.start();
+                is_exam_started=true;
+            }
             int x = Integer.parseInt(QuestionNumberBox.getValue().toString());
             Question_statement.setText(question[x].getQues_statement());
             Option_A.setText(question[x].getOption_a());
@@ -297,13 +306,6 @@ public class Answer_Script_Controller implements Initializable {
                         Option_A.setSelected(false);
                     }
                 }
-                for(int i=0;i<10;i++)
-                {
-                    System.out.println("HERE\n");
-                    time_remaining.setText(Integer.toString(i));
-                    Thread.sleep(500);
-                    time_remaining.setText("NIL");
-                }
             }
         } catch (Exception e) {
             System.out.println("\nPrevious question e problem\n");
@@ -403,4 +405,5 @@ public class Answer_Script_Controller implements Initializable {
             preparedstatement.close();
         }
     }
+    
 }
