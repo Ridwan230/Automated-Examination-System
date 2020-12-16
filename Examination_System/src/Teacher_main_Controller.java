@@ -135,4 +135,16 @@ public class Teacher_main_Controller implements Initializable {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    public void check_result(ActionEvent event) throws IOException{
+        FXMLLoader loader= new FXMLLoader();
+        loader.setLocation(getClass().getResource("Teacher_Report_Card.fxml"));
+        Parent root=loader.load();
+        Scene teacher_main_scene= new Scene(root);
+        Teacher_Report_Card_Controller controller= loader.getController();
+        controller.pass_teacher_info(selected_teacher);
+        ((Node) event.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        primaryStage.setScene(teacher_main_scene);
+        primaryStage.show();
+    }
 }
