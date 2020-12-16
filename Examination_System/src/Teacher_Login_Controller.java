@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.sql.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -30,6 +31,7 @@ public class Teacher_Login_Controller implements Initializable {
     private TextField textfield_username;
     @FXML
     private PasswordField textfield_password;
+    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -71,6 +73,11 @@ public class Teacher_Login_Controller implements Initializable {
                 
                 return false;
             } else {
+                Alert a1 = new Alert(Alert.AlertType.ERROR);
+                a1.setTitle("ERROR");
+                a1.setContentText("Wrong Username or Password!");
+                a1.setHeaderText("Try Again.");
+                a1.showAndWait();
                 System.out.println("\nLogin Unsuccessful\n");
                 return false;
             }

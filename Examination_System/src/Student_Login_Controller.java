@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -75,6 +76,11 @@ public class Student_Login_Controller implements Initializable {
                 primaryStage.show();
                 
             } else {
+                Alert a1 = new Alert(Alert.AlertType.ERROR);
+                a1.setTitle("ERROR");
+                a1.setContentText("Wrong Username or Password!");
+                a1.setHeaderText("Try Again.");
+                a1.showAndWait();
                 System.out.println("\nLogin Unsuccessful\n");
             }
         } catch (SQLException e) {

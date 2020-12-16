@@ -8,6 +8,7 @@ import java.net.URL;
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
@@ -124,29 +127,36 @@ public class Question_setting_Controller implements Initializable {
     public void Confirm() throws SQLException {
         PreparedStatement preparedstatement = null;
         try {
-            for(int i=1;i<=selected_exam.getTotal_questions();i++) {
-             
-                if(question[i]!=null){
-                    String query1 = "Insert into Question_info(Question_number,Exam_Code,Question_statement,Option_a,Option_b,Option_c,Option_d,Correct_answer) values (?,?,?,?,?,?,?,?)";
-                    preparedstatement = connection.prepareStatement(query1);
-                    preparedstatement.setString(1, Integer.toString(i));
-                    preparedstatement.setString(2, Integer.toString(selected_exam.getExam_code()));
-                    preparedstatement.setString(3, question[i].getQues_statement());                   
-                    preparedstatement.setString(4, question[i].getOption_a());
-                    preparedstatement.setString(5, question[i].getOption_b());
-                    preparedstatement.setString(6, question[i].getOption_c());
-                    preparedstatement.setString(7, question[i].getOption_d());
-                    preparedstatement.setString(8, question[i].getCorrect_ans());
-                    preparedstatement.executeUpdate();
-                }               
+            Alert a1 = new Alert(Alert.AlertType.CONFIRMATION);
+            a1.setTitle(null);
+            a1.setContentText("Confirm Submission?");
+            a1.setHeaderText(null);
+            Optional<ButtonType> result1 = a1.showAndWait();
+
+            if (result1.get() == ButtonType.OK) {
+                for (int i = 1; i <= selected_exam.getTotal_questions(); i++) {
+
+                    if (question[i] != null) {
+                        String query1 = "Insert into Question_info(Question_number,Exam_Code,Question_statement,Option_a,Option_b,Option_c,Option_d,Correct_answer) values (?,?,?,?,?,?,?,?)";
+                        preparedstatement = connection.prepareStatement(query1);
+                        preparedstatement.setString(1, Integer.toString(i));
+                        preparedstatement.setString(2, Integer.toString(selected_exam.getExam_code()));
+                        preparedstatement.setString(3, question[i].getQues_statement());
+                        preparedstatement.setString(4, question[i].getOption_a());
+                        preparedstatement.setString(5, question[i].getOption_b());
+                        preparedstatement.setString(6, question[i].getOption_c());
+                        preparedstatement.setString(7, question[i].getOption_d());
+                        preparedstatement.setString(8, question[i].getCorrect_ans());
+                        preparedstatement.executeUpdate();
+                    }
+                }
             }
-            
+
         } catch (Exception e) {
             System.out.println("\nQuestion database e problem\n");
             e.printStackTrace();
         } finally {
-            preparedstatement.close();
-            
+            preparedstatement.close();          
         }
     }
     

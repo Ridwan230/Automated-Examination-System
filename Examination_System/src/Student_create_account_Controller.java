@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -64,6 +65,11 @@ public class Student_create_account_Controller implements Initializable{
             }
             if(flag==true)
             {
+                Alert a1 = new Alert(Alert.AlertType.ERROR);
+                a1.setTitle("ERROR");
+                a1.setContentText("Username Already Taken!");
+                a1.setHeaderText("Try Again.");
+                a1.showAndWait();
                 System.out.println("\nUsername Already Taken\n");
                 return false;
             }
@@ -83,6 +89,11 @@ public class Student_create_account_Controller implements Initializable{
                 }
                 else
                 {
+                    Alert a1 = new Alert(Alert.AlertType.ERROR);
+                    a1.setTitle("ERROR");
+                    a1.setContentText("Passwords Not Matched!!!");
+                    a1.setHeaderText("Check Password");
+                    a1.showAndWait();
                     return false;
                 }
             }
@@ -102,6 +113,11 @@ public class Student_create_account_Controller implements Initializable{
     { 
         try{
             if (Student_isLogin() == true) {
+                Alert a1 = new Alert(Alert.AlertType.INFORMATION);
+                a1.setTitle("Success");
+                a1.setContentText("Account Created Successfully");
+                a1.setHeaderText(null);
+                a1.showAndWait();
                 System.out.println("\nAccount Created\n");
                 ((Node) event.getSource()).getScene().getWindow().hide();
                 Parent root = FXMLLoader.load(getClass().getResource("Student_Login.fxml"));
