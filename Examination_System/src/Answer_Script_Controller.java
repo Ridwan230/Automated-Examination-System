@@ -23,6 +23,19 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
+import java.awt.AWTException;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.jcodec.api.awt.AWTSequenceEncoder;
+
 /**
  * FXML Controller class
  *
@@ -31,9 +44,9 @@ import javafx.stage.Stage;
 public class Answer_Script_Controller implements Initializable {
 
     Connection connection;
-    private Question question[]=new Question[105];
-    private Answer answer[]=new Answer[105];
-    
+    private Question question[] = new Question[105];
+    private Answer answer[] = new Answer[105];
+
     @FXML
     private Label exam_name;
 
@@ -42,13 +55,13 @@ public class Answer_Script_Controller implements Initializable {
 
     @FXML
     private Label total_time;
-    
+
     @FXML
     private Label time_remaining;
-    
+
     @FXML
     private ComboBox QuestionNumberBox;
-    
+
     @FXML
     private Label Question_statement;
 
@@ -63,25 +76,25 @@ public class Answer_Script_Controller implements Initializable {
 
     @FXML
     private RadioButton Option_D;
-    
+
     @FXML
     private Button submit;
-    
+
     @FXML
     private ToggleGroup option;
-    
+
     int total_questions, exam_code, student_id, time, temp;
-    boolean is_exam_started=false;
-    
+    boolean is_exam_started = false;
+
     public void pass_exam_info(String name, int marks, int t, int tot_questions, int code, int stu_id) throws SQLException, IOException {
         exam_name.setText(name);
         total_marks.setText(Integer.toString(marks));
-        time=t;
-        total_time.setText(Integer.toString(t)+" Minutes");
-        total_questions=tot_questions;
+        time = t;
+        total_time.setText(Integer.toString(t) + " Minutes");
+        total_questions = tot_questions;
         exam_code = code;
         student_id = stu_id;
-        for(int i=1;i<=total_questions;i++ ){
+        for (int i = 1; i <= total_questions; i++) {
             QuestionNumberBox.getItems().add(Integer.toString(i));
         }
         get_all_Questions(exam_code);
@@ -95,17 +108,15 @@ public class Answer_Script_Controller implements Initializable {
         connection = SqliteConnection.Connector();
     }
 
-    
-    public void get_all_Questions(int exam_code) throws SQLException, IOException
-    {
+    public void get_all_Questions(int exam_code) throws SQLException, IOException {
         PreparedStatement preparedstatement = null;
         ResultSet resultset = null;
         String query = "Select * from Question_info where Exam_Code = ?";
         try {
             preparedstatement = connection.prepareStatement(query);
-            preparedstatement.setString(1,Integer.toString(exam_code));
+            preparedstatement.setString(1, Integer.toString(exam_code));
             resultset = preparedstatement.executeQuery();
-            int x=1;
+            int x = 1;
             while (resultset.next()) {
                 String Question_statement = resultset.getString("Question_statement");
                 String Option1_A = resultset.getString("Option_a");
@@ -113,10 +124,10 @@ public class Answer_Script_Controller implements Initializable {
                 String Option1_C = resultset.getString("Option_c");
                 String Option1_D = resultset.getString("Option_d");
                 String correct_answer = resultset.getString("Correct_answer");
-                question[x]=new Question(Question_statement, Option1_A, Option1_B, Option1_C, Option1_D, correct_answer);
+                question[x] = new Question(Question_statement, Option1_A, Option1_B, Option1_C, Option1_D, correct_answer);
                 x++;
             }
-            
+
         } catch (SQLException e) {
             System.out.println("\nGet all question e problem\n");
             e.printStackTrace();
@@ -125,25 +136,21 @@ public class Answer_Script_Controller implements Initializable {
             resultset.close();
         }
     }
-    
-    
-    public void select_question(ActionEvent event){
+
+    public void select_question(ActionEvent event) {
         try {
-            if(is_exam_started==false)
-            {
-                time_remaining.setText(Integer.toString(time*60));
-                Runnable obj1 = new Runnable()
-                {
-                    public void run(){
-                        temp = time*60;
-                        for (int i = 1; i <= time*60; i++) {
+            if (is_exam_started == false) {
+                time_remaining.setText(Integer.toString(time * 60));
+                Runnable obj1 = new Runnable() {
+                    public void run() {
+                        temp = time * 60;
+                        for (int i = 1; i <= time * 60; i++) {
                             try {
                                 temp--;
-                                int temp1=temp;
+                                int temp1 = temp;
                                 Platform.runLater(() -> time_remaining.setText(Integer.toString(temp1)));
                                 Thread.sleep(1000);
-                                if(temp==0)
-                                {
+                                if (temp == 0) {
                                     Platform.runLater(() -> submit.fire());
                                 }
                             } catch (Exception e) {
@@ -153,9 +160,54 @@ public class Answer_Script_Controller implements Initializable {
                         }
                     }
                 };
+                Runnable obj2 = new Runnable() {
+                    public void run() {
+                        try {
+                            int temp_recording = time * 60;
+                            List<BufferedImage> imageList = new ArrayList<>();
+                            
+                            Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+                            Robot robot;
+                            
+                            robot = new Robot();
+                            
+                            File file = new File("Recording.mp4");
+                            
+                            System.out.println("getting screen images...");
+                            
+                            int count = 0;
+                            
+                            while (count < temp_recording) {
+                                
+                                BufferedImage image = robot.createScreenCapture(screenRect);
+                                imageList.add(image);
+                                
+                                count++;
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException ex) {
+                                    Logger.getLogger(Answer_Script_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                            AWTSequenceEncoder sequenceEncoder = AWTSequenceEncoder.createSequenceEncoder(file, 1);
+                            for (int i = 0; i < imageList.size(); i++) {
+                                sequenceEncoder.encodeImage(imageList.get(i));
+                                System.out.println("list encode " + i);
+                                
+                            }
+                            sequenceEncoder.finish();
+                        } catch (AWTException ex) {
+                            Logger.getLogger(Answer_Script_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IOException ex) {
+                            Logger.getLogger(Answer_Script_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                };
                 Thread t1 = new Thread(obj1);
+                Thread t2 = new Thread(obj2);
                 t1.start();
-                is_exam_started=true;
+                t2.start();
+                is_exam_started = true;
             }
             int x = Integer.parseInt(QuestionNumberBox.getValue().toString());
             Question_statement.setText(question[x].getQues_statement());
@@ -192,14 +244,12 @@ public class Answer_Script_Controller implements Initializable {
                     Option_A.setSelected(false);
                 }
             }
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("\nSelect question e problem\n");
             e.printStackTrace();
         }
     }
-    
+
     public void previous_question(ActionEvent event) {
         try {
             int x = Integer.parseInt(QuestionNumberBox.getValue().toString());
@@ -211,38 +261,28 @@ public class Answer_Script_Controller implements Initializable {
                 Option_C.setText(question[x].getOption_c());
                 Option_D.setText(question[x].getOption_d());
                 QuestionNumberBox.setValue(Integer.toString(x));
-                if(answer[x]==null)
-                {
+                if (answer[x] == null) {
                     Option_A.setSelected(false);
                     Option_B.setSelected(false);
                     Option_C.setSelected(false);
                     Option_D.setSelected(false);
-                }
-                else
-                {
-                    if(answer[x].getAns().equals(Option_A.getText()))
-                    {
+                } else {
+                    if (answer[x].getAns().equals(Option_A.getText())) {
                         Option_A.setSelected(true);
                         Option_B.setSelected(false);
                         Option_C.setSelected(false);
                         Option_D.setSelected(false);
-                    }
-                    else if(answer[x].getAns().equals(Option_B.getText()))
-                    {
+                    } else if (answer[x].getAns().equals(Option_B.getText())) {
                         Option_B.setSelected(true);
                         Option_A.setSelected(false);
                         Option_C.setSelected(false);
                         Option_D.setSelected(false);
-                    }
-                    else if(answer[x].getAns().equals(Option_C.getText()))
-                    {
+                    } else if (answer[x].getAns().equals(Option_C.getText())) {
                         Option_C.setSelected(true);
                         Option_B.setSelected(false);
                         Option_A.setSelected(false);
                         Option_D.setSelected(false);
-                    }
-                    else if(answer[x].getAns().equals(Option_D.getText()))
-                    {
+                    } else if (answer[x].getAns().equals(Option_D.getText())) {
                         Option_D.setSelected(true);
                         Option_B.setSelected(false);
                         Option_C.setSelected(false);
@@ -255,7 +295,7 @@ public class Answer_Script_Controller implements Initializable {
             e.printStackTrace();
         }
     }
-    
+
     public void next_question(ActionEvent event) {
         try {
             int x = Integer.parseInt(QuestionNumberBox.getValue().toString());
@@ -267,39 +307,29 @@ public class Answer_Script_Controller implements Initializable {
                 Option_C.setText(question[x].getOption_c());
                 Option_D.setText(question[x].getOption_d());
                 QuestionNumberBox.setValue(Integer.toString(x));
-                
-                if(answer[x]==null)
-                {
+
+                if (answer[x] == null) {
                     Option_A.setSelected(false);
                     Option_B.setSelected(false);
                     Option_C.setSelected(false);
                     Option_D.setSelected(false);
-                }
-                else
-                {
-                    if(answer[x].getAns().equals(Option_A.getText()))
-                    {
+                } else {
+                    if (answer[x].getAns().equals(Option_A.getText())) {
                         Option_A.setSelected(true);
                         Option_B.setSelected(false);
                         Option_C.setSelected(false);
                         Option_D.setSelected(false);
-                    }
-                    else if(answer[x].getAns().equals(Option_B.getText()))
-                    {
+                    } else if (answer[x].getAns().equals(Option_B.getText())) {
                         Option_B.setSelected(true);
                         Option_A.setSelected(false);
                         Option_C.setSelected(false);
                         Option_D.setSelected(false);
-                    }
-                    else if(answer[x].getAns().equals(Option_C.getText()))
-                    {
+                    } else if (answer[x].getAns().equals(Option_C.getText())) {
                         Option_C.setSelected(true);
                         Option_B.setSelected(false);
                         Option_A.setSelected(false);
                         Option_D.setSelected(false);
-                    }
-                    else if(answer[x].getAns().equals(Option_D.getText()))
-                    {
+                    } else if (answer[x].getAns().equals(Option_D.getText())) {
                         Option_D.setSelected(true);
                         Option_B.setSelected(false);
                         Option_C.setSelected(false);
@@ -312,12 +342,12 @@ public class Answer_Script_Controller implements Initializable {
             e.printStackTrace();
         }
     }
-    
-    public void save_changes(ActionEvent event){
+
+    public void save_changes(ActionEvent event) {
         try {
             int x = Integer.parseInt(QuestionNumberBox.getValue().toString());
             if (answer[x] != null) {
-                
+
                 if (Option_A.isSelected()) {
                     System.out.println("Saved A");
                     answer[x].setAns(Option_A.getText());
@@ -331,10 +361,10 @@ public class Answer_Script_Controller implements Initializable {
                     System.out.println("Saved D");
                     answer[x].setAns(Option_D.getText());
                 }
-                
+
                 answer[x].setQuestion_no(x);
                 answer[x].setExam_code(exam_code);
-                
+
             } else {
                 if (Option_A.isSelected()) {
                     System.out.println("New Saved A");
@@ -348,47 +378,40 @@ public class Answer_Script_Controller implements Initializable {
                 } else if (Option_D.isSelected()) {
                     System.out.println("New Saved D");
                     answer[x] = new Answer(Option_D.getText(), x, exam_code);
-                }              
+                }
             }
         } catch (Exception e) {
             System.out.println("\nSave changes e problem\n");
             e.printStackTrace();
         }
-        
+
     }
-    
+
     public void Submit(ActionEvent event) throws SQLException {
         PreparedStatement preparedstatement = null;
         try {
-            for(int i=1;i<=total_questions;i++) {
-             
-                if(answer[i]!=null){
-                    
+            for (int i = 1; i <= total_questions; i++) {
+
+                if (answer[i] != null) {
+
                     String query1 = "Insert into Answer_Info(Exam_code,Question_no,Student_id,Answer) values (?,?,?,?)";
                     preparedstatement = connection.prepareStatement(query1);
                     preparedstatement.setString(1, Integer.toString(exam_code));
                     preparedstatement.setString(2, Integer.toString(i));
                     preparedstatement.setString(3, Integer.toString(student_id));
-                    
-                    if(answer[i].getAns().equals(question[i].getOption_a()))
-                    {
+
+                    if (answer[i].getAns().equals(question[i].getOption_a())) {
                         preparedstatement.setString(4, "a");
-                    }
-                    else if(answer[i].getAns().equals(question[i].getOption_b()))
-                    {
+                    } else if (answer[i].getAns().equals(question[i].getOption_b())) {
                         preparedstatement.setString(4, "b");
-                    }
-                    else if(answer[i].getAns().equals(question[i].getOption_c()))
-                    {
+                    } else if (answer[i].getAns().equals(question[i].getOption_c())) {
                         preparedstatement.setString(4, "c");
-                    }
-                    else if(answer[i].getAns().equals(question[i].getOption_d()))
-                    {
+                    } else if (answer[i].getAns().equals(question[i].getOption_d())) {
                         preparedstatement.setString(4, "d");
                     }
-                    
+
                     preparedstatement.executeUpdate();
-                }           
+                }
             }
             System.out.println("\nSubmitted\n");
             ((Node) event.getSource()).getScene().getWindow().hide();
@@ -397,7 +420,7 @@ public class Answer_Script_Controller implements Initializable {
             Stage primaryStage = new Stage();
             primaryStage.setScene(scene);
             primaryStage.show();
-            
+
         } catch (Exception e) {
             System.out.println("\nSubmit e problem\n");
             e.printStackTrace();
@@ -405,5 +428,5 @@ public class Answer_Script_Controller implements Initializable {
             preparedstatement.close();
         }
     }
-    
+
 }
