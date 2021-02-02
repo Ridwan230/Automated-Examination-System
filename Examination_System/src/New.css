@@ -1,0 +1,73 @@
+*
+{  
+    -fx-background-color:#333333;
+    -fx-background-radius: 10px;
+    -fx-border-color:   #333333; 
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-border-insets: 0 0 0 0, 2px 2px 2px 2px;
+}
+
+.button
+{
+    -fx-text-fill:#99cc00;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 200px ;
+    -fx-background-color:#333333; 
+    -fx-border-color:#99cc00 ;
+}
+
+.button:pressed
+{
+
+    -fx-background-insets: 1px 0 -1px 0, 1px 0 -1px 0;  /* remove shadow and make button move down to make it look like button is being pressed */
+}
+
+.button:hover
+{
+    -fx-background-color: black; 
+}
+
+.label
+{
+    -fx-text-fill:#99cc00;
+}
+
+#password,#username,#textfield_password,#textfield_username,#name,#id,
+#confirm_password,#department,#comboBox,#Exam_Label,
+#Question_statement,#Option_A,#Option_B, #Option_C, #Option_D,#correct_answer,
+#save
+{
+    -fx-border-color:#99cc00;
+    -fx-text-fill:#ffffff;
+
+}
+
+.combo-box
+{
+    -fx-border-color: #99cc00;
+}
+    
+.combo-box .list-cell 
+{
+    -fx-background: white;
+    -fx-text-fill:#ffffff;
+    
+}
+
+.combo-box .list-cell:hover
+{
+    -fx-underline:true;
+}
+
+
+   
+#time_remaining
+{
+    -fx-text-fill: #eb4242
+}
+.radio-button:selected .radio .dot
+{
+    -fx-background-color: #99cc00;
+    -fx-background-insets: 0;
+}

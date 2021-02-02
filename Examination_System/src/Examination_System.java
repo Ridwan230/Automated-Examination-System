@@ -23,6 +23,7 @@ public class Examination_System extends Application {
         
         Parent root = FXMLLoader.load(getClass().getResource("main_window.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("newCascadeStyleSheet.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
     }

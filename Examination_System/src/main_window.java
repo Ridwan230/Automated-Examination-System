@@ -19,12 +19,18 @@ import javafx.stage.Stage;
  */
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 
 public class main_window implements Initializable{
     
     public DB_Model dbmodel = new DB_Model();
+    @FXML
+    private Button teac;
+    @FXML
+    private Button stud;
     @Override
     public void initialize(URL location, ResourceBundle resources){
         if(dbmodel.isDbConnected()){
@@ -34,6 +40,7 @@ public class main_window implements Initializable{
         }
     }
 
+    @FXML
     public void Teacher_login(ActionEvent event) throws IOException
     {
         ((Node)event.getSource()).getScene().getWindow().hide();
@@ -43,6 +50,7 @@ public class main_window implements Initializable{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    @FXML
     public void Student_login(ActionEvent event) throws IOException
     {
         ((Node)event.getSource()).getScene().getWindow().hide();

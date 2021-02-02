@@ -59,7 +59,7 @@ public class Student_main_Controller implements Initializable {
         student_username.setText("Username: " + selected_student.getUsername());
         student_id.setText("ID: " + Integer.toString(selected_student.getID()));
         stu_id = selected_student.getID();
-        student_name.setText("Name: " + selected_student.getName());
+        student_name.setText(selected_student.getName());
         
         
         PreparedStatement preparedstatement = null;
@@ -179,12 +179,12 @@ public class Student_main_Controller implements Initializable {
             resultset = preparedstatement.executeQuery();
             marks_obtained=resultset.getInt("obtained_marks");
             
-            Result_display_Label.setText(marks_obtained+" out of "+ total_marks);
-            
+            int percentage= (marks_obtained*100)/total_marks;
+            Result_display_Label.setText("Marks: " + marks_obtained+"/"+ total_marks+" -> "+"Percentage: "+percentage +"%");
             
             
         }catch (SQLException e){
-            System.out.println("\nResult Check e rpoblem\n");
+            System.out.println("\nResult Check Problem\n");
             e.printStackTrace();
         }finally {
             preparedstatement.close();

@@ -49,10 +49,12 @@ public class Teacher_main_Controller implements Initializable {
     private Label teacher_id;
     @FXML
     private Label teacher_Department;
+    @FXML
+    private Label label;
 
     public void pass_teacher_info(Teacher teacher) {
         this.selected_teacher = teacher;
-        teacher_username.setText("Username: " + selected_teacher.getUsername());
+        teacher_username.setText( selected_teacher.getUsername());
         teacher_id.setText("ID: " + Integer.toString(selected_teacher.getID()));
         teacher_Department.setText("Department: " + selected_teacher.getDepartmant());
     }

@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main_window">
+    <stylesheets>
+           <URL value="@newCascadeStyleSheet.css" />
+         </stylesheets>
    <children>
-      <Label layoutY="22.0" prefHeight="99.0" prefWidth="600.0" text="             Examination System">
+      <Label layoutX="66.0" layoutY="29.0" prefHeight="99.0" prefWidth="600.0" text="EXAMINATION SYSTEM" textAlignment="RIGHT" textFill="#a7bb24">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="Book Antiqua Bold Italic" size="41.0" />
          </font>
       </Label>
-      <Button layoutX="7.0" layoutY="147.0" mnemonicParsing="false" onAction="#Teacher_login" prefHeight="185.0" prefWidth="292.0" text="Teacher">
+      <Button fx:id="teac" layoutX="7.0" layoutY="199.0" mnemonicParsing="false" onAction="#Teacher_login" prefHeight="133.0" prefWidth="292.0" text="TEACHER" textFill="#171716">
          <font>
-            <Font size="21.0" />
+            <Font name="Berlin Sans FB" size="32.0" />
          </font>
       </Button>
-      <Button layoutX="300.0" layoutY="147.0" mnemonicParsing="false" onAction="#Student_login" prefHeight="185.0" prefWidth="292.0" text="Student">
+      <Button fx:id="stud" layoutX="300.0" layoutY="199.0" mnemonicParsing="false" onAction="#Student_login" prefHeight="133.0" prefWidth="292.0" text="STUDENT" textFill="#171717">
          <font>
-            <Font size="21.0" />
+            <Font name="Berlin Sans FB" size="32.0" />
          </font>
       </Button>
+      <Label layoutX="237.0" layoutY="135.0" prefHeight="21.0" prefWidth="162.0" text="ARE YOU A" textFill="#a7bb24">
+         <font>
+            <Font name="Book Antiqua Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
