@@ -25,8 +25,9 @@ import javafx.stage.Stage;
  */
 
 /**
- *
- * @author ASUS
+ * This is a public class which is the controller class of Student_Login FXML
+ * 
+ * @author Ifrad(180041225)
  */
 public class Student_Login_Controller implements Initializable {
     
@@ -41,6 +42,16 @@ public class Student_Login_Controller implements Initializable {
         connection = SqliteConnection.Connector();
     }
     
+    /**
+     * This function checks the signIN info of the student and if successful passes the info of that student to the student's home page
+     * 
+     * @param event
+     * @throws SQLException
+     * @throws IOException 
+     * 
+     * @author Ifrad(180041225)
+     * @author Ridwan(180041230)
+     */
     public void Sign_in(ActionEvent event) throws SQLException, IOException
     {
         boolean flag = false;
@@ -92,7 +103,13 @@ public class Student_Login_Controller implements Initializable {
         }        
     }
     
-    
+    /**
+     * This function when triggered opens the Student Account Creation window
+     * 
+     * @param event
+     * @throws IOException 
+     * @author Ifrad(180041225)
+     */
     public void Create_account(ActionEvent event) throws IOException
     {
         ((Node)event.getSource()).getScene().getWindow().hide();
@@ -103,6 +120,13 @@ public class Student_Login_Controller implements Initializable {
         primaryStage.show();
     }
     
+    /**
+     * This function when triggered opens the Main window
+     * 
+     * @param event
+     * @throws IOException 
+     * @author Ifrad(180041225)
+     */
     public void Back(ActionEvent event) throws IOException
     { 
         ((Node)event.getSource()).getScene().getWindow().hide();

@@ -20,9 +20,12 @@ import javafx.scene.control.TextField;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 /**
- *
- * @author ASUS
+ * This is the controller class of Teacher_Login FXML
+ * 
+ * @author Ifrad(180041225)
  */
 public class Teacher_Login_Controller implements Initializable {
 
@@ -38,6 +41,18 @@ public class Teacher_Login_Controller implements Initializable {
         connection = SqliteConnection.Connector();
     }
 
+    
+    /**
+     * This function checks the signIN info of the teacher and if successful passes the info of that teacher to the teacher's home page
+     * 
+     * @param event
+     * @return
+     * @throws SQLException
+     * @throws IOException 
+     * 
+     * @author Ifrad(180041225)
+     * @author Ridwan(180041230)
+     */
     public boolean Sign_in(ActionEvent event) throws SQLException, IOException {
         boolean flag = false;
         PreparedStatement preparedstatement = null;
@@ -91,6 +106,13 @@ public class Teacher_Login_Controller implements Initializable {
         }
     }
 
+    /**
+     * This function when triggered opens the Teacher Account Creation window
+     * 
+     * @param event
+     * @throws IOException 
+     * @author Ifrad(180041225)
+     */
     public void Create_account(ActionEvent event) throws IOException {
         ((Node) event.getSource()).getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("Teacher_create_account.fxml"));
@@ -100,6 +122,13 @@ public class Teacher_Login_Controller implements Initializable {
         primaryStage.show();
     }
     
+    /**
+     * This function when triggered opens the Main window
+     * 
+     * @param event
+     * @throws IOException 
+     * @author Ifrad(180041225)
+     */
     public void Back(ActionEvent event) throws IOException
     { 
         ((Node)event.getSource()).getScene().getWindow().hide();

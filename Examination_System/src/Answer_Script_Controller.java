@@ -37,9 +37,9 @@ import java.util.logging.Logger;
 import org.jcodec.api.awt.AWTSequenceEncoder;
 
 /**
- * FXML Controller class
+ * This is a public class which is the controller of Answer_Script FXML
  *
- * @author ASUS
+ * @author Ifrad(180041225)
  */
 public class Answer_Script_Controller implements Initializable {
 
@@ -86,6 +86,21 @@ public class Answer_Script_Controller implements Initializable {
     int total_questions, exam_code, student_id, time, temp;
     boolean is_exam_started = false;
 
+    /**
+     * This function passes the exam info
+     * 
+     * @param name This represents the exam name
+     * @param marks This represents the exam marks
+     * @param t This represents the exam time
+     * @param tot_questions This represents the total number of exam questions
+     * @param code This represents the exam code
+     * @param stu_id This represents the student Id
+     * 
+     * @throws SQLException
+     * @throws IOException
+     *
+     * @author Ifrad(180041225)
+     */
     public void pass_exam_info(String name, int marks, int t, int tot_questions, int code, int stu_id) throws SQLException, IOException {
         exam_name.setText(name);
         total_marks.setText(Integer.toString(marks));
@@ -108,6 +123,15 @@ public class Answer_Script_Controller implements Initializable {
         connection = SqliteConnection.Connector();
     }
 
+    /**
+     * This function stores all the questions of an exam into an array
+     * 
+     * @param exam_code This represents the exam code
+     * @throws SQLException
+     * @throws IOException 
+     * 
+     * @author Ifrad(180041225)
+     */
     public void get_all_Questions(int exam_code) throws SQLException, IOException {
         PreparedStatement preparedstatement = null;
         ResultSet resultset = null;
@@ -137,10 +161,35 @@ public class Answer_Script_Controller implements Initializable {
         }
     }
 
+    /**
+     * This function when triggered it starts the timer of the exam and screen recording through multi threading
+     * This also lets the user select the questions with the help of combo box 
+     * 
+     * @param event 
+     * @author Ifrad(180041225)
+     * @author Ridwan(180041230)
+     */
     public void select_question(ActionEvent event) {
         try {
             if (is_exam_started == false) {
-                time_remaining.setText(Integer.toString(time * 60));
+                //time_remaining.setText(Integer.toString(time * 60));
+                if((time * 60)/60 == 0 && (time * 60)%60 == 0)
+                {
+                    time_remaining.setText("00:00");
+                }
+                else if((time * 60)/60 == 0)
+                {
+                    time_remaining.setText("00:"+Integer.toString((time * 60)%60));
+                }
+                else if((time * 60)%60 == 0)
+                {
+                    time_remaining.setText(Integer.toString((time * 60)/60)+":00");
+                }
+                else
+                {
+                    time_remaining.setText(Integer.toString((time * 60)/60)+":"+Integer.toString((time * 60)%60));
+                }
+                
                 Runnable obj1 = new Runnable() {
                     public void run() {
                         temp = time * 60;
@@ -148,7 +197,35 @@ public class Answer_Script_Controller implements Initializable {
                             try {
                                 temp--;
                                 int temp1 = temp;
-                                Platform.runLater(() -> time_remaining.setText(Integer.toString(temp1)));
+                                //Platform.runLater(() -> time_remaining.setText(Integer.toString(temp1)));
+                                if(temp1/60 == 0 && temp1%60 == 0)
+                                {
+                                    Platform.runLater(() -> time_remaining.setText("00:00"));
+                                }
+                                else if(temp1/60 == 0)
+                                {
+                                    if(temp1%60 < 10)
+                                    {
+                                        Platform.runLater(() -> time_remaining.setText("00:0"+Integer.toString(temp1%60)));
+                                    }
+                                    else
+                                    {
+                                        Platform.runLater(() -> time_remaining.setText("00:"+Integer.toString(temp1%60)));
+                                    }
+                                }
+                                else if(temp1%60 == 0)
+                                {
+                                    Platform.runLater(() -> time_remaining.setText(Integer.toString(temp1/60)+":00"));
+                                }
+                                else if(temp1%60 < 10)
+                                {
+                                    Platform.runLater(() -> time_remaining.setText(Integer.toString(temp1/60)+":0"+Integer.toString(temp1%60)));
+                                }
+                                else
+                                {
+                                    Platform.runLater(() -> time_remaining.setText(Integer.toString(temp1/60)+":"+Integer.toString(temp1%60)));
+                                }
+                                
                                 Thread.sleep(1000);
                                 if (temp == 0) {
                                     Platform.runLater(() -> submit.fire());
@@ -250,6 +327,12 @@ public class Answer_Script_Controller implements Initializable {
         }
     }
 
+    /**
+     * This function when triggered displays the previous question
+     * 
+     * @param event 
+     * @author Ifrad(180041225)
+     */
     public void previous_question(ActionEvent event) {
         try {
             int x = Integer.parseInt(QuestionNumberBox.getValue().toString());
@@ -296,6 +379,13 @@ public class Answer_Script_Controller implements Initializable {
         }
     }
 
+    
+    /**
+     * This function when triggered displays the next question
+     * 
+     * @param event 
+     * @author Ifrad(180041225)
+     */
     public void next_question(ActionEvent event) {
         try {
             int x = Integer.parseInt(QuestionNumberBox.getValue().toString());
@@ -343,6 +433,13 @@ public class Answer_Script_Controller implements Initializable {
         }
     }
 
+
+    /**
+     * This function when triggered save the answer into an array
+     * 
+     * @param event 
+     * @author Ifrad(180041225)
+     */
     public void save_changes(ActionEvent event) {
         try {
             int x = Integer.parseInt(QuestionNumberBox.getValue().toString());
@@ -387,6 +484,14 @@ public class Answer_Script_Controller implements Initializable {
 
     }
 
+    /**
+     * This function when triggered save all the answers into the database and completes the submission
+     * 
+     * @param event
+     * @throws SQLException 
+     * 
+     * @author Ifrad(180041225)
+     */
     public void Submit(ActionEvent event) throws SQLException {
         PreparedStatement preparedstatement = null;
         try {

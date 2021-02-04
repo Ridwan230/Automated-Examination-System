@@ -128,6 +128,13 @@ public class Teacher_main_Controller implements Initializable {
         }
     }
 
+    /**
+     * This function when triggered opens the Teacher Login window
+     * 
+     * @param event
+     * @throws IOException 
+     * @author Ifrad(180041225)
+     */
     public void Back(ActionEvent event) throws IOException
     { 
         ((Node)event.getSource()).getScene().getWindow().hide();
@@ -137,6 +144,8 @@ public class Teacher_main_Controller implements Initializable {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    
+    
     public void check_result(ActionEvent event) throws IOException{
         FXMLLoader loader= new FXMLLoader();
         loader.setLocation(getClass().getResource("Teacher_Report_Card.fxml"));

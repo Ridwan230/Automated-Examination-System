@@ -160,6 +160,13 @@ public class Question_setting_Controller implements Initializable {
         }
     }
     
+    /**
+     * This function when triggered opens the Teacher main window
+     * 
+     * @param event
+     * @throws IOException 
+     * @author Ifrad(180041225)
+     */
     public void Back(ActionEvent event) throws IOException
     { 
         ((Node)event.getSource()).getScene().getWindow().hide();

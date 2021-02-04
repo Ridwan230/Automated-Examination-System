@@ -5,15 +5,24 @@
  */
 
 /**
- *
- * @author ASUS
+ * This is a public class which represents an answer
+ * 
+ * @author Ifrad(180041225)
  */
 public class Answer {
     private String ans;
     private int question_no,exam_code;
 
-    public Answer (String ans, int question_no, int exam_code)
-    {
+    /**
+     * Constructor of the Answer class
+     * 
+     * @param ans The answer of the question
+     * @param question_no The question number of the given answer
+     * @param exam_code The exam code of the question
+     * 
+     * @author Ifrad(180041225)
+     */
+    public Answer(String ans, int question_no, int exam_code) {
         this.ans = ans;
         this.question_no=question_no;
         this.exam_code=exam_code;

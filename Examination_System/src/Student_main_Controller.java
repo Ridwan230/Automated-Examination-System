@@ -24,9 +24,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * This is a public class which is the controller class of Student_main FXML
  *
- * @author ASUS
+ * @author Ifrad(180041225)
  */
 public class Student_main_Controller implements Initializable {
 
@@ -54,6 +54,12 @@ public class Student_main_Controller implements Initializable {
     String exam_name;
     int exam_marks,exam_time,exam_total_questions,stu_id; 
     
+    /**
+     * 
+     * @param student
+     * @throws SQLException 
+     * @author Ridwan(180041230)
+     */
     public void pass_student_info(Student student) throws SQLException {
         this.selected_student = student;
         student_username.setText("Username: " + selected_student.getUsername());
@@ -94,6 +100,15 @@ public class Student_main_Controller implements Initializable {
         connection = SqliteConnection.Connector();
     }    
     
+    /**
+     * This function checks the credentials provided by the user to enter an exam and if successful opens the Answer Script
+     * 
+     * @param event
+     * @throws IOException
+     * @throws SQLException 
+     * 
+     * @author Ifrad(180041225)
+     */
     public void Enter(ActionEvent event) throws IOException, SQLException
     {
         boolean flag=false;
@@ -149,6 +164,13 @@ public class Student_main_Controller implements Initializable {
         }
     }
     
+    /**
+     * This function when triggered opens the Student Login window
+     * 
+     * @param event
+     * @throws IOException 
+     * @author Ifrad(180041225)
+     */
     public void Back(ActionEvent event) throws IOException
     { 
         ((Node)event.getSource()).getScene().getWindow().hide();
@@ -159,6 +181,14 @@ public class Student_main_Controller implements Initializable {
         primaryStage.show();
     }
     
+    /**
+     * 
+     * 
+     * @param event
+     * @throws IOException
+     * @throws SQLException 
+     * @author Ridwan(180041230)
+     */
     public void check_result(ActionEvent event) throws IOException, SQLException
     {
         PreparedStatement preparedstatement = null;

@@ -13,8 +13,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
- * @author ASUS
+ * This class starts the application
+ * 
+ * @author Ifrad(180041225)
  */
 public class Examination_System extends Application {
     

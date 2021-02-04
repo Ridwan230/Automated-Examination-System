@@ -5,8 +5,9 @@
  */
 
 /**
- *
- * @author ASUS
+ * This class represents a student
+ * 
+ * @author Ifrad(180041225)
  */
 public class Student {
     private String name,username;

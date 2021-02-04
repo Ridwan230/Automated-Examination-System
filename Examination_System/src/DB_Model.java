@@ -4,13 +4,20 @@
  * and open the template in the editor.
  */
 
-/**
- *
- * @author ASUS
- */
+
 import java.sql.*;
+
+/**
+ * This class represents the connection of the database
+ * 
+ * @author Ifrad(180041225)
+ */
 public class DB_Model {
     Connection connection;
+    
+    /**
+     * Constructor of the DB_Model class which establishes the database connection
+     */
     public DB_Model(){
         connection = SqliteConnection.Connector();
         if(connection==null) {
@@ -19,6 +26,11 @@ public class DB_Model {
         }
     }
     
+    /**
+     * 
+     * @return Returns True if the database is connected and False otherwise
+     * @author Ifrad(180041225)
+     */
     public boolean isDbConnected(){
         try{
             return !connection.isClosed();

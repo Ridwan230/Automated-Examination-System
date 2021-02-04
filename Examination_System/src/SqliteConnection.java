@@ -6,8 +6,9 @@
  */
 
 /**
- *
- * @author ASUS
+ * This class establishes the sqlite database connection
+ * 
+ * @author Ifrad(180041225)
  */
 import java.sql.*;
 public class SqliteConnection {

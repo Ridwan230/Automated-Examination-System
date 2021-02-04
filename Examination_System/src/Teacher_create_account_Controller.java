@@ -4,10 +4,7 @@
  * and open the template in the editor.
  */
 
-/**
- *
- * @author ASUS
- */
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
@@ -28,6 +25,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
+/**
+ * This is the controller class of Teacher_create_account FXML 
+ * 
+ * @author Ifrad(180041225)
+ */
 public class Teacher_create_account_Controller implements Initializable{
     Connection connection;
     @FXML
@@ -48,8 +50,14 @@ public class Teacher_create_account_Controller implements Initializable{
         connection = SqliteConnection.Connector();
     }
     
+    /**
+     * This function checks if the provided credentials for new account creation is valid or not
+     * 
+     * @return Returns True if the credentials provided for new account creation is valid and False otherwise
+     * @throws SQLException 
+     * @author Ifrad(180041225)
+     */
     public boolean Teacher_isLogin() throws SQLException{
-        
         boolean flag=false;
         PreparedStatement preparedstatement = null;
         ResultSet resultset = null;
@@ -110,7 +118,13 @@ public class Teacher_create_account_Controller implements Initializable{
         }
     }
     
-    
+    /**
+     * This function when triggered creates the account
+     * 
+     * @param event
+     * @throws IOException 
+     * @author Ifrad(180041225)
+     */
     public void Create(ActionEvent event) throws IOException
     { 
         try{
@@ -138,6 +152,13 @@ public class Teacher_create_account_Controller implements Initializable{
         }
     }
     
+    /**
+     * This function when triggered opens the Teacher Login window
+     * 
+     * @param event
+     * @throws IOException 
+     * @author Ifrad(180041225)
+     */
     public void Back(ActionEvent event) throws IOException
     { 
         ((Node)event.getSource()).getScene().getWindow().hide();

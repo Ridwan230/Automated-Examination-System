@@ -8,7 +8,7 @@
 
 /**
  *
- * @author User
+ * @author Ridwan(180041230)
  */
 public class Result {
     private String ID ;
