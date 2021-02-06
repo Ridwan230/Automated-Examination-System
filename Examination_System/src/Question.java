@@ -5,12 +5,22 @@
  */
 
 /**
- *
- * @author User
+ * A public class which represents Exam information
+ * @author Ridwan(180041230)
  */
 public class Question {
     private String ques_statement, option_a, option_b, option_c, option_d, correct_ans;
 
+    /**
+     * Constructor for Question class
+     * @param ques_statement the question
+     * @param option_a Option A
+     * @param option_b Option B
+     * @param option_c Option C
+     * @param option_d Option D
+     * @param correct_ans the correct answer
+     * @author Ridwan(180041230)
+     */
     public Question(String ques_statement, String option_a, String option_b, String option_c, String option_d, String correct_ans) {
         this.ques_statement = ques_statement;
         this.option_a = option_a;

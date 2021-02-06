@@ -8,8 +8,10 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Examination_System.jar" size="51263" download="eager" />
+    <jar href="Examination_System.jar" size="51390" download="eager" />
+    <jar href="lib\jcodec-0.2.2.jar" size="1980740" download="eager" />
     <jar href="lib\jcodec-0.2.5.jar" size="2068570" download="eager" />
+    <jar href="lib\jcodec-javase-0.2.2.jar" size="14055" download="eager" />
     <jar href="lib\jcodec-javase-0.2.5.jar" size="14008" download="eager" />
     <jar href="lib\sqlite-jdbc-3.32.3.2.jar" size="7210681" download="eager" />
   </resources>

@@ -40,6 +40,7 @@ import org.jcodec.api.awt.AWTSequenceEncoder;
  * This is a public class which is the controller of Answer_Script FXML
  *
  * @author Ifrad(180041225)
+ * @author Ridwan(180041230)
  */
 public class Answer_Script_Controller implements Initializable {
 
@@ -95,11 +96,10 @@ public class Answer_Script_Controller implements Initializable {
      * @param tot_questions This represents the total number of exam questions
      * @param code This represents the exam code
      * @param stu_id This represents the student Id
-     * 
+     * @author Ifrad(180041225)
      * @throws SQLException
      * @throws IOException
      *
-     * @author Ifrad(180041225)
      */
     public void pass_exam_info(String name, int marks, int t, int tot_questions, int code, int stu_id) throws SQLException, IOException {
         exam_name.setText(name);
@@ -129,8 +129,8 @@ public class Answer_Script_Controller implements Initializable {
      * @param exam_code This represents the exam code
      * @throws SQLException
      * @throws IOException 
-     * 
      * @author Ifrad(180041225)
+     * 
      */
     public void get_all_Questions(int exam_code) throws SQLException, IOException {
         PreparedStatement preparedstatement = null;
@@ -164,10 +164,9 @@ public class Answer_Script_Controller implements Initializable {
     /**
      * This function when triggered it starts the timer of the exam and screen recording through multi threading
      * This also lets the user select the questions with the help of combo box 
-     * 
-     * @param event 
      * @author Ifrad(180041225)
      * @author Ridwan(180041230)
+     * @param event 
      */
     public void select_question(ActionEvent event) {
         try {
@@ -266,6 +265,11 @@ public class Answer_Script_Controller implements Initializable {
                                     Logger.getLogger(Answer_Script_Controller.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
+                            
+                            
+                            //Making a video with captured screen shots with fps = 1
+                            
+                            
                             AWTSequenceEncoder sequenceEncoder = AWTSequenceEncoder.createSequenceEncoder(file, 1);
                             for (int i = 0; i < imageList.size(); i++) {
                                 sequenceEncoder.encodeImage(imageList.get(i));
@@ -329,9 +333,8 @@ public class Answer_Script_Controller implements Initializable {
 
     /**
      * This function when triggered displays the previous question
-     * 
-     * @param event 
      * @author Ifrad(180041225)
+     * @param event 
      */
     public void previous_question(ActionEvent event) {
         try {
@@ -487,7 +490,7 @@ public class Answer_Script_Controller implements Initializable {
     /**
      * This function when triggered save all the answers into the database and completes the submission
      * 
-     * @param event
+     * @param event pressing pushbutton submit
      * @throws SQLException 
      * 
      * @author Ifrad(180041225)

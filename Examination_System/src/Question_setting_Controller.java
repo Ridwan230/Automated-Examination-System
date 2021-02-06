@@ -26,9 +26,9 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * A public class which is the controller of Question_setting FXML file
  *
- * @author User
+ * @author Ridwan(180041230)
  */
 public class Question_setting_Controller implements Initializable {
     
@@ -79,7 +79,12 @@ public class Question_setting_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         connection = SqliteConnection.Connector();
     }    
-    
+
+    /**
+     * Passes the information regarding exam to the current scene
+     * @param exam 
+     * @author Ridwan(180041230)
+     */
     public void pass_exam_info(Exam exam){
         this.selected_exam=exam;
         exam_name.setText("Exam Name: " +selected_exam.getExam_name());
@@ -91,6 +96,9 @@ public class Question_setting_Controller implements Initializable {
             QuestionNumberBox.getItems().add(Integer.toString(i));
         }
     }
+    /**
+     * Loads questions already saved
+     */
     public void change_question_number(){
         Question_statement.clear();
         Option_A.clear();
@@ -109,6 +117,10 @@ public class Question_setting_Controller implements Initializable {
             correct_answer.setText(question[x].getCorrect_ans());
         }
     }
+    /**
+     * Saves changes made 
+     * @author Ridwan(180041230)
+     */
     public void save_changes(){
         int x=Integer.parseInt(QuestionNumberBox.getValue().toString());
         if(question[x]!=null){
@@ -123,7 +135,11 @@ public class Question_setting_Controller implements Initializable {
             question[x]=new Question(Question_statement.getText(), Option_A.getText(), Option_B.getText(), Option_C.getText(), Option_D.getText(), correct_answer.getText());
         }
     }
-    
+    /**
+     * Confirms the exam with specified questions
+     * @throws SQLException 
+     * @author Ridwan(180041230)
+     */
     public void Confirm() throws SQLException {
         PreparedStatement preparedstatement = null;
         try {

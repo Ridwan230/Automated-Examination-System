@@ -7,7 +7,7 @@
  */
 
 /**
- *
+ * This class results of students to be displayed
  * @author Ridwan(180041230)
  */
 public class Result {
@@ -15,6 +15,13 @@ public class Result {
     private String Name;
     private String marks_obtained;
 
+    /**
+     * Constructor of Result class
+     * @param ID ID of student
+     * @param Name name of the student
+     * @param marks_obtained obtained marks in the specific exam
+     * @author Ridwan(180041230)
+     */
     public Result(String ID,String Name, String marks_obtained) {
         this.ID = ID;
         this.Name=Name;

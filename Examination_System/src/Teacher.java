@@ -5,13 +5,20 @@
  */
 
 /**
- *
- * @author User
+ * Class for storing teacher information
+ * @author Ridwan(180041230)
  */
 public class Teacher {
     private String username,departmant;
     int ID;
     
+    /**
+     * COnstructor for teacher class
+     * @param username username of teacher
+     * @param ID id of teacher
+     * @param department department the teacher belongs to
+     * @author Ridwan(180041230)
+     */
     public Teacher(String username, int ID, String department){
         this.ID=ID;
         this.departmant=department;

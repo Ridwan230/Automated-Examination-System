@@ -5,8 +5,9 @@
  */
 
 /**
- *
- * @author User
+ * This class represents the exam information
+ * 
+ * @author Ridwan(180041230)
  */
 public class Exam {
     private String exam_name;
@@ -51,6 +52,16 @@ public class Exam {
     public void setTotal_questions(int total_questions) {
         this.total_questions = total_questions;
     }
+    /**
+     * Constructor for the exam class
+     * @param exam_name Name of the exam
+     * @param exam_code Exam code
+     * @param exam_marks Total marks
+     * @param exam_time Exam time
+     * @param total_questions Maximum number of questions
+     * @author Ridwan(180041230)
+     * 
+     */
 
     public Exam(String exam_name, int exam_code, int exam_marks, int exam_time, int total_questions) {
         this.exam_name = exam_name;

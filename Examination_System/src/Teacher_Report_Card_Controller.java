@@ -30,9 +30,9 @@ import javafx.stage.Stage;
 
 
 /**
- * FXML Controller class
+ * Controller for teacher report card class
  *
- * @author User
+ * @author Ridwan(180041230)
  */
 public class Teacher_Report_Card_Controller implements Initializable {
     Teacher selected_teacher;
@@ -68,6 +68,12 @@ public class Teacher_Report_Card_Controller implements Initializable {
     public void pass_teacher_info(Teacher teacher) {
         this.selected_teacher = teacher;
     }
+    /**
+     * takes back to the previous scene
+     * @param event
+     * @throws IOException 
+     * @author Ridwan(180041230)
+     */
     public void back(ActionEvent event) throws IOException{
         FXMLLoader loader= new FXMLLoader();
         loader.setLocation(getClass().getResource("Teacher_main.fxml"));
@@ -80,6 +86,14 @@ public class Teacher_Report_Card_Controller implements Initializable {
         primaryStage.setScene(teacher_main_scene);
         primaryStage.show();
     }
+    
+    /**
+     * Displays the result in tabular form
+     * @param event
+     * @throws IOException
+     * @throws SQLException 
+     * @author Ridwan(180041230)
+     */
     public void check_result(ActionEvent event) throws IOException, SQLException
     {
         PreparedStatement preparedstatement = null;
