@@ -59,6 +59,7 @@ public class Student_main_Controller implements Initializable {
      * @param student
      * @throws SQLException 
      * @author Ridwan(180041230)
+     * @author Abrar(180041235)
      */
     public void pass_student_info(Student student) throws SQLException {
         this.selected_student = student;
@@ -188,6 +189,7 @@ public class Student_main_Controller implements Initializable {
      * @throws IOException
      * @throws SQLException 
      * @author Ridwan(180041230)
+     * @author Abrar(180041235)
      */
     public void check_result(ActionEvent event) throws IOException, SQLException
     {

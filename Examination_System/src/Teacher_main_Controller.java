@@ -57,6 +57,7 @@ public class Teacher_main_Controller implements Initializable {
      * brings teacher's information to this scene
      * @param teacher 
      * @author Ridwan(180041230)
+     * @author Abrar(180041235)
      */
     public void pass_teacher_info(Teacher teacher) {
         this.selected_teacher = teacher;
